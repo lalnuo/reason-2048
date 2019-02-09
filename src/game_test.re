@@ -1,38 +1,63 @@
-open Jest;
+open AvaBucklescript.Sync;
+open Game;
 
-describe("moving to right", () => {
-  test("with one element moves it to right", _ => {
-    let startingRow = [Some(1), None, None, None];
-    let movedRow = [None, None, None, Some(1)];
-    Expect.(expect(Game.moveRowRight(startingRow)) |> toEqual(movedRow));
-  });
+test("Moving to right with one number", t => {
+  let start = [Some(1), None, None, None];
+  let afterMoving = [None, None, None, Some(1)];
 
-  test("with one element in the middle it is moved to the right", _ => {
-    let startingRow = [None, Some(1), None, None];
-    let movedRow = [None, None, None, Some(1)];
-    Expect.(expect(Game.moveRowRight(startingRow)) |> toEqual(movedRow));
-  });
+  t.deepEqual(moveRowRight(start), afterMoving);
+  t.pass();
 });
 
-describe("moving to left", () => {
-  test("with one element moves it to left", _ => {
-    let startingRow = [None, None, None, Some(1)];
-    let movedRow = [Some(1), None, None, None];
-    Expect.(expect(Game.moveRowLeft(startingRow)) |> toEqual(movedRow));
-  });
+test("Moving to right with two different numbers", t => {
+  let start = [Some(1), Some(2), None, None];
+  let afterMoving = [None, None, Some(1), Some(2)];
 
-  test("with one element in the middle it is moved to the left", _ => {
-    let startingRow = [None, None, Some(1), None];
-    let movedRow = [Some(1), None, None, None];
-    Expect.(expect(Game.moveRowLeft(startingRow)) |> toEqual(movedRow));
-  });
+  t.deepEqual(moveRowRight(start), afterMoving);
+  t.pass();
 });
 
-/*test("with two different elements both are moved to right", _ =>*/
-/*Expect.(*/
-/*expect(Game.moveRowRight([Some(1), Some(2), None, None])) |> toEqual([None, None, Some(1), Some(2)])*/
-/*)*/
-/*);*/
-/*test("with two similar elements they are merged and moved to right", _ =>*/
-/*Expect.(expect(Game.moveRowRight([Some(1), Some(1), None, None])) |> toEqual([None, None, None, Some(2)]))*/
-/*);*/
+test("Moving to left with one number", t => {
+  let start = [None, None, None, Some(1)];
+  let afterMoving = [Some(1), None, None, None];
+
+  t.deepEqual(moveRowLeft(start), afterMoving);
+  t.pass();
+});
+
+test("Moving to left with two different numbers", t => {
+  let start = [None, None, Some(1), Some(2)];
+  let afterMoving = [Some(1), Some(2), None, None];
+
+  t.deepEqual(moveRowLeft(start), afterMoving);
+  t.pass();
+});
+
+
+test("number joiner joins neighbours", t => {
+  let start = [Some(2), Some(2), Some(2), None];
+  let afterMoving = [Some(4), Some(2), None, None];
+  t.deepEqual(numberJoiner(start), afterMoving)
+  t.pass()
+})
+
+test("number joiner joins multiple neighbours", t => {
+  let start = [Some(2), Some(2), Some(2), Some(2)];
+  let afterMoving = [Some(4), Some(4), None, None];
+  t.deepEqual(numberJoiner(start), afterMoving)
+  t.pass()
+})
+
+test("number joiner joins numbers where the first one can not be joined", t => {
+  let start = [Some(2), Some(4), Some(4), None];
+  let afterMoving = [Some(2), Some(8), None, None];
+  t.deepEqual(numberJoiner(start), afterMoving)
+  t.pass()
+})
+
+test("number joiner joins rows when there is Nones between joinable numbers", t => {
+  let start = [Some(4), None, Some(4), None];
+  let afterMoving = [Some(8), None, None, None];
+  t.deepEqual(numberJoiner(start), afterMoving)
+  t.pass()
+})
