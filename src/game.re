@@ -20,10 +20,24 @@ let moveRowRight = row => {
 
   List.append(nones, nums);
 }
-
 let moveRowLeft = row => numberJoiner(row)
+
+let rec transpose = (board) =>
+  switch (board) {
+    | [] => []
+    | [[], ..._] => []
+    | board => [List.map(List.hd, board), ...transpose(List.map(List.tl, board))]
+  }
+
+let moveLeft = board => List.map(moveRowLeft, board);
 
 
 let moveRight = board => {
   List.map(moveRowRight, board);
 };
+
+let moveUp = board =>
+  transpose(board)
+    |> moveLeft
+    |> transpose
+

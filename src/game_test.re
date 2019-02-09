@@ -60,4 +60,34 @@ test("number joiner joins rows when there is Nones between joinable numbers", t 
   let afterMoving = [Some(8), None, None, None];
   t.deepEqual(numberJoiner(start), afterMoving)
   t.pass()
-})
+});
+
+test("getting vertical rows", t => {
+  let matrix = [
+    [Some(1), Some(2), Some(3)],
+    [Some(4), Some(5), Some(6)],
+    [Some(7), Some(8), Some(9)],
+  ]
+
+  let verticalRowsResult = [
+    [Some(1), Some(4), Some(7)],
+    [Some(2), Some(5), Some(8)],
+    [Some(3), Some(6), Some(9)]
+  ]
+  t.deepEqual(transpose(matrix), verticalRowsResult)
+  t.pass();
+});
+
+test("Moving up", t => {
+  let start = [
+    [None, Some(1), None],
+    [None, Some(1), None],
+    [None, None, None],
+  ];
+  let afterMoving = [
+    [None, Some(2), None],
+    [None, None, None],
+    [None, None, None]
+  ]
+  t.deepEqual(moveUp(start), afterMoving)
+});
