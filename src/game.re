@@ -1,5 +1,20 @@
 
 let onlyNones = nums => !List.exists(i => i != None, nums)
+
+let optionSum = List.fold_left((acc, i) => {
+  switch (i) {
+    | Some(i) => acc + i
+    | None => acc
+  }
+}, 0);
+
+let rec removeN = (items, n) =>
+  switch (items) {
+    | [a, ...rest] when a == n => rest
+    | [a, ...rest] => [a, ...removeN(rest, n)]
+    | [] => []
+  }
+
 let rec numberJoiner = row =>
   switch (row) {
     | [] => row
@@ -59,15 +74,14 @@ let possibleMoves = board =>
 
 let isGameOver = board => !possibleMoves(board)
 
-let boardSum = (board: list(list(option(int)))) =>
-  List.flatten(board)
-  |> List.fold_left(
-       (acc, i) =>
-         switch (i) {
-         | Some(i) => acc + i
-         | None => acc
-         },
-       0,
-     );
+let rec findNewBlocks = (beforeMove, afterMove) => {
+  switch (beforeMove) {
+    | [] => afterMove
+    | [a, ...rest] => findNewBlocks(rest, removeN(afterMove, a))
+  }
+}
 
-
+let moveScore = (beforeMove, afterMove) => {
+  findNewBlocks(List.flatten(beforeMove), List.flatten(afterMove))
+  |> optionSum
+}

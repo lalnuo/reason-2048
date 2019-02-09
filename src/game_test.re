@@ -167,14 +167,24 @@ test("is game over returns false when game is not over CASE 2", t => {
   t.pass();
 })
 
-test("board sum calculates sum correctly", t => {
-  let state = [
-    [Some(1), Some(2), Some(3)],
-    [Some(4), None, Some(5)],
-    [Some(6), Some(7), Some(8)],
-  ];
+test("remove N removes first instance of N CASE 1", t => {
+  t.deepEqual(removeN([1, 1, 2, 3], 1), [1, 2, 3]);
+});
 
-  t.deepEqual(boardSum(state), 36);
-  t.pass()
-})
+test("remove N removes first instance of N CASE 2", t => {
+  t.deepEqual(removeN([1, 2, 2, 3], 2), [1, 2, 3]);
+});
 
+test("move score is calculated by sum(newState) - sum(oldState))", t => {
+  let beforeMove = [
+    [Some(2), Some(2)],
+    [None, None]
+  ]
+
+  let afterMove = [
+    [Some(4), None],
+    [None, None]
+  ]
+
+  t.deepEqual(moveScore(beforeMove, afterMove), 4)
+});
