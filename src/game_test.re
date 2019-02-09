@@ -167,14 +167,6 @@ test("is game over returns false when game is not over CASE 2", t => {
   t.pass();
 })
 
-test("remove N removes first instance of N CASE 1", t => {
-  t.deepEqual(removeN([1, 1, 2, 3], 1), [1, 2, 3]);
-});
-
-test("remove N removes first instance of N CASE 2", t => {
-  t.deepEqual(removeN([1, 2, 2, 3], 2), [1, 2, 3]);
-});
-
 test("move score is calculated by sum(newState) - sum(oldState))", t => {
   let beforeMove = [
     [Some(2), Some(2)],
