@@ -9,7 +9,7 @@ let rec numberJoiner = row =>
     | [Some(num), None] => [Some(num), None]
     | [Some(num), None, ...rest] when onlyNones(rest) => [Some(num), None, ...rest]
     | [Some(num), None, ...rest] => numberJoiner(List.append([Some(num), ...rest], [None]))
-    | [Some(num)] => [Some(num)]
+    | [Some(_)] as x => x
   }
 
 let isNone = i => i == None
@@ -31,7 +31,6 @@ let rec transpose = (board) =>
 
 let moveLeft = board => List.map(moveRowLeft, board);
 
-
 let moveRight = board => {
   List.map(moveRowRight, board);
 };
@@ -41,3 +40,21 @@ let moveUp = board =>
     |> moveLeft
     |> transpose
 
+let moveDown = board =>
+  transpose(board)
+    |> moveRight
+    |> transpose
+
+let hasNones = board =>
+  List.fold_left((acc, i) => List.append(acc, i), [], board)
+    |> List.exists(i => i == None)
+
+let possibleMoves = board =>
+  List.exists(hasNones, [
+    moveRight(board),
+    moveLeft(board),
+    moveUp(board),
+    moveDown(board)
+  ])
+
+let isGameOver = board => !possibleMoves(board)
