@@ -54,8 +54,7 @@ test("number joiner joins numbers where the first one can not be joined", t => {
   t.pass();
 });
 
-test(
-  "number joiner joins rows when there is Nones between joinable numbers", t => {
+test("number joiner joins rows when there is Nones between joinable numbers", t => {
   let start = [Some(4), None, Some(4), None];
   let afterMoving = [Some(8), None, None, None];
   t.deepEqual(numberJoiner(start), afterMoving);
@@ -128,7 +127,7 @@ test("has nones returns false when there are nones", t => {
   t.pass();
 });
 
-test("is game over returns true when game is over", t => {
+test("is game over returns true when game is over CASE 1", t => {
   let state = [
     [Some(1), Some(3), Some(2)],
     [Some(3), Some(5), Some(4)],
@@ -137,3 +136,45 @@ test("is game over returns true when game is over", t => {
   t.deepEqual(isGameOver(state), true);
   t.pass();
 })
+
+test("is game over returns true when game is over CASE 2", t => {
+  let state = [
+    [Some(1), Some(2), Some(3)],
+    [Some(4), Some(5), Some(6)],
+    [Some(7), Some(8), Some(9)],
+  ];
+  t.deepEqual(isGameOver(state), true);
+  t.pass();
+})
+
+test("is game over returns false when game is not over CASE 1", t => {
+  let state = [
+    [Some(1), Some(2), Some(3)],
+    [Some(1), Some(5), Some(6)],
+    [Some(7), Some(8), Some(9)],
+  ];
+  t.deepEqual(isGameOver(state), false);
+  t.pass();
+})
+
+test("is game over returns false when game is not over CASE 2", t => {
+  let state = [
+    [Some(4), None, Some(1)],
+    [Some(2), None, Some(2)],
+    [Some(7), Some(8), Some(9)],
+  ];
+  t.deepEqual(isGameOver(state), false);
+  t.pass();
+})
+
+test("board sum calculates sum correctly", t => {
+  let state = [
+    [Some(1), Some(2), Some(3)],
+    [Some(4), None, Some(5)],
+    [Some(6), Some(7), Some(8)],
+  ];
+
+  t.deepEqual(boardSum(state), 36);
+  t.pass()
+})
+

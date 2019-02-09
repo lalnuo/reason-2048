@@ -58,3 +58,16 @@ let possibleMoves = board =>
   ])
 
 let isGameOver = board => !possibleMoves(board)
+
+let boardSum = (board: list(list(option(int)))) =>
+  List.flatten(board)
+  |> List.fold_left(
+       (acc, i) =>
+         switch (i) {
+         | Some(i) => acc + i
+         | None => acc
+         },
+       0,
+     );
+
+
