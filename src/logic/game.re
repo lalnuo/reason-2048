@@ -3,7 +3,8 @@ Random.self_init()
 
 type gameState = {
    score: int,
-   board: list(list(option(int)))
+   board: list(list(option(int))),
+   isGameOver: bool
  }
 let rec numberJoiner = row =>
   switch (row) {
@@ -140,13 +141,21 @@ let getNextBoard = (state, action) => switch(action) {
   | MoveUp => moveUp(state.board)
   | MoveDown => moveDown(state.board)
   | Restart => state.board
+
 }
+
+let getInitialState = () => ({
+  score: 0,
+  board: newGame(),
+  isGameOver: false
+})
 
 let play = (action, state) => {
   if (action == Restart) {
     {
       score: 0,
-      board: newGame()
+      board: newGame(),
+      isGameOver: false
     }
   } else {
    let nextBoard = getNextBoard(state, action);
@@ -154,8 +163,8 @@ let play = (action, state) => {
 
     {
       board: addBlock(nextBoard),
-      score: state.score + score
+      score: state.score + score,
+      isGameOver: isGameOver(nextBoard)
     }
   }
-
 }

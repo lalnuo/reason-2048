@@ -12,7 +12,23 @@ body, html, #root {
   background-color: #282c34;
 }
 
+.game-over {
+  top: -4px;
+  left: -4px;
+  height: 478px;
+  width: 478px;
+  border-radius: 6px;
+  position: absolute;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 28px;
+  color: white;
+  background-color: rgba(0, 0, 0, 0.7);
+}
+
 .game-grid {
+  position: relative;
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   grid-template-rows: repeat(4, 1fr);
@@ -28,7 +44,6 @@ body, html, #root {
   display: inline-grid;
   justify-content: center;
   align-items: center;
-  background-color: darkgray;
   margin: 8px;
   border-radius: 3px;
   font-size: 55px;
@@ -43,6 +58,11 @@ body, html, #root {
   height: 500px;
 }
 
+.esc {
+  margin-left: 4px;
+  margin-right: 4px;
+}
+
 .header {
   color: white;
   font-size: 48px;
@@ -54,5 +74,14 @@ body, html, #root {
   height: 40vmin;
 }
 
+.header-and-score {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-right: 40px;
+}
 
-
+.score {
+  color: white;
+  font-size: 24px;
+}
