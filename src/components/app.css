@@ -1,6 +1,8 @@
 body, html, #root {
   width: 100%;
   height: 100%;
+  position: fixed;
+  overflow: hidden;
 }
 
 .App {
@@ -60,6 +62,12 @@ body, html, #root {
     width: 277px;
   }
 
+  .game-over {
+    height: 285px;
+    font-size: 14px;
+    width: 285px;
+  }
+
   .grid-item {
     font-size: 24px;
   }
@@ -72,15 +80,14 @@ body, html, #root {
   justify-content: center;
 }
 
-.esc {
-  margin-left: 4px;
-  margin-right: 4px;
-}
-
 .header {
   color: white;
   font-size: 48px;
   margin-bottom: 12px;
+}
+
+.game-over-text {
+  width: 200px;
 }
 
 .App-logo {

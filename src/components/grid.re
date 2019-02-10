@@ -4,13 +4,13 @@ let s = ReasonReact.string;
 
 let component = ReasonReact.statelessComponent("Grid");
 let renderList = elems => Array.of_list(elems) |> ReasonReact.array
-let make = (~board, ~isGameOver, _children) => {
+let make = (~board, ~isGameOver, ~restartGame, _children) => {
   ...component,
   render: _self =>
     <div tabIndex={1} className="game-grid">
     {
       switch (isGameOver) {
-        | true => <GameOver />
+        | true => <GameOver restartGame={restartGame} />
         | false => ReasonReact.null
       }
     }

@@ -35,6 +35,7 @@ let make = (_children) => {
                 onSwipeDown={() => self.send(KeyDown(40))}
               >
           <Grid
+            restartGame={_event => self.send(KeyDown(27))}
             isGameOver={self.state.isGameOver}
             board={self.state.board}
           />
