@@ -158,11 +158,11 @@ let play = (action, state) => {
       isGameOver: false
     }
   } else {
-   let nextBoard = getNextBoard(state, action);
+    let nextBoard = getNextBoard(state, action);
     let score = moveScore(state.board, nextBoard);
 
     {
-      board: addBlock(nextBoard),
+      board: if (state.board == nextBoard) nextBoard else addBlock(nextBoard),
       score: state.score + score,
       isGameOver: isGameOver(nextBoard)
     }
