@@ -17,6 +17,14 @@ test("Moving to right with two different numbers", t => {
   t.pass();
 });
 
+test("Moving to right with three in a row", t => {
+  let start = [None, Some(1), Some(1), Some(1), ];
+  let afterMoving = [None, None, Some(1), Some(2)];
+
+  t.deepEqual(moveRowRight(start), afterMoving);
+  t.pass();
+});
+
 test("Moving to left with one number", t => {
   let start = [None, None, None, Some(1)];
   let afterMoving = [Some(1), None, None, None];

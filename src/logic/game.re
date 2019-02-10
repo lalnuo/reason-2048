@@ -20,11 +20,10 @@ let rec numberJoiner = row =>
 
 let isNone = i => i == None
 let moveRowRight = row => {
-  let row = List.rev(numberJoiner(row))
+  let row = numberJoiner(List.rev(row))
   let nones = List.filter(isNone, row)
-  let nums = List.rev(List.filter(i => !isNone(i), row))
-
-  List.append(nones, nums);
+  let nums = List.filter(i => !isNone(i), row)
+  List.append(nones, List.rev(nums));
 }
 let moveRowLeft = row => numberJoiner(row)
 
