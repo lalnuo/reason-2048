@@ -1,6 +1,6 @@
 # ReasonML 2048
 
-🕹 http://faded-stone.surge.sh/
+🕹 http://lalli-2048.surge.sh
 
 ## How too run locally
 
