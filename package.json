@@ -63,7 +63,7 @@
   },
   "ava": {
     "files": [
-      "**/*_test.bs.js"
+      "src/**/*_test.bs.js"
     ]
   },
   "eslintConfig": {

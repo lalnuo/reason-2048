@@ -13,3 +13,11 @@ let rec removeN = (items, n) =>
     | [a, ...rest] => [a, ...removeN(rest, n)]
     | [] => []
   }
+
+let replace = (items, nth, item) => {
+  let splitted = Belt.List.splitAt(items, nth)
+  switch (splitted) {
+    | Some((head, tail)) => head @ [item] @ List.tl(tail)
+    | None => items
+  }
+}

@@ -180,3 +180,46 @@ test("move score is calculated by sum(newState) - sum(oldState))", t => {
 
   t.deepEqual(moveScore(beforeMove, afterMove), 4)
 });
+
+test("add block adds a block to a position with None CASE 1", t => {
+  let state = [
+    [Some(2), Some(2)],
+    [None, None]
+  ]
+  let newState = addBlock(state)
+
+  let lastRow = List.nth(newState, 1)
+  t.deepEqual(List.exists(i => i != None, lastRow), true)
+});
+
+test("add block adds a block to a position with None CASE2", t => {
+  let state = [
+    [Some(2), Some(2)],
+    [Some(2), None]
+  ]
+  let newState = addBlock(state)
+
+  let lastBlock = List.nth(List.nth(newState, 1), 1)
+  t.deepEqual(lastBlock != None, true)
+});
+
+test("add block adds a block to a position with None CASE 3", t => {
+  let state = [
+    [Some(2), Some(2), Some(2)],
+    [Some(2), Some(2), None],
+    [Some(2), Some(2), Some(2)]
+  ]
+  let newState = addBlock(state)
+  Js.log(newState)
+  t.deepEqual(hasNones(newState), false)
+});
+
+test("add block adds a block to a position with None CASE 4", t => {
+  let state = [
+    [Some(2), Some(2), Some(2)],
+    [Some(2), Some(2), Some(2)],
+    [Some(2), None, Some(2)]
+  ]
+  let newState = addBlock(state)
+  t.deepEqual(hasNones(newState), false)
+});
