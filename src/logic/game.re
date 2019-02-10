@@ -83,11 +83,9 @@ let toCoordinate = (board, index) => {
   let rows = List.length(board)
   let rowLength = List.nth(board, 0) |> List.length
 
-  let column = mod_float(float_of_int(index), float_of_int(List.length(board)))
-  let row = int_of_float(floor(float_of_int((index / rowLength))))
+  let column = mod_float(float_of_int(index), float_of_int(List.length(board)));
+  let row = int_of_float(floor(float_of_int((index / rowLength))));
 
-  Js.log2(rows, rowLength)
-  Js.log2(column, row);
   (column, row)
 }
 

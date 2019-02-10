@@ -210,7 +210,6 @@ test("add block adds a block to a position with None CASE 3", t => {
     [Some(2), Some(2), Some(2)]
   ]
   let newState = addBlock(state)
-  Js.log(newState)
   t.deepEqual(hasNones(newState), false)
 });
 

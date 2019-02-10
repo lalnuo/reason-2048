@@ -1,13 +1,14 @@
-[@bs.module "react-touch"] external swipeable : ReasonReact.reactClass = "Swipeable";
+[@bs.module "react-swipeable"] external swipeable : ReasonReact.reactClass = "Swipeable";
 
 let make = (~onSwipeLeft, ~onSwipeUp, ~onSwipeDown, ~onSwipeRight, children) =>
   ReasonReact.wrapJsForReason(
     ~reactClass=swipeable,
     ~props={
-      "onSwipeLeft": onSwipeLeft,
-      "onSwipeRight": onSwipeRight,
-      "onSwipeDown": onSwipeDown,
-      "onSwipeUp": onSwipeUp
+      "onSwipedLeft": onSwipeLeft,
+      "onSwipedRight": onSwipeRight,
+      "onSwipedDown": onSwipeDown,
+      "onSwipedUp": onSwipeUp,
+      "preventDefaultTouchmoveEvent": true
     },
     children
   );

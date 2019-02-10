@@ -21,24 +21,26 @@ let make = (_children) => {
     }
   },
   render: self =>
-    <Swipeable
-      onSwipeLeft={() => self.send(KeyDown(37))}
-      onSwipeUp={() => self.send(KeyDown(38))}
-      onSwipeRight={() => self.send(KeyDown(39))}
-      onSwipeDown={() => self.send(KeyDown(40))}
-    >
+
         <div tabIndex={1} onKeyDown={event => self.send(KeyDown(ReactEvent.Keyboard.which(event)))} className="App">
           <div className="content">
           <div className="header-and-score">
             <div className="header">{string("2048")}</div>
             <div className="score">{s("Score: " ++ string_of_int(self.state.score))}</div>
           </div>
+              <Swipeable
+                onSwipeLeft={() => self.send(KeyDown(37))}
+                onSwipeUp={() => self.send(KeyDown(38))}
+                onSwipeRight={() => self.send(KeyDown(39))}
+                onSwipeDown={() => self.send(KeyDown(40))}
+              >
           <Grid
             isGameOver={self.state.isGameOver}
             board={self.state.board}
           />
+                </Swipeable>
+
           </div>
         </div>
-      </Swipeable>
     ,
 };
